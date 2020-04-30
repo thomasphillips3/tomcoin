@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TomCoin</string>
+    <string name="action_settings">Clear</string>
+    <string name="addBlock">Add Block</string>
+</resources>
