@@ -1,5 +1,6 @@
 package com.thomasphillips3.tomcoin
 
+import android.content.Intent
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,8 @@ RecyclerView.Adapter<RecyclerAdapter.BlockHolder>() {
         parent: ViewGroup,
         viewType: Int
     ): RecyclerAdapter.BlockHolder {
-        TODO("Not yet implemented")
+        val inflatedView = parent.inflate(R.layout.fragment_blockchain, false)
+        return BlockHolder(inflatedView)
     }
 
     override fun getItemCount(): Int {
@@ -31,7 +33,10 @@ RecyclerView.Adapter<RecyclerAdapter.BlockHolder>() {
         }
 
         override fun onClick(v: View?) {
-            Log.d(this.toString(), "clicked")
+            val context = itemView.context
+            val showBlockIntent = Intent(context, BlockchainFragment::class.java)
+            showBlockIntent.putExtra(BLOCK_KEY, block.toString())
+            context.startActivity(showBlockIntent)
         }
 
         companion object {

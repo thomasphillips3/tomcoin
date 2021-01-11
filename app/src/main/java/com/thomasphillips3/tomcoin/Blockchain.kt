@@ -11,6 +11,8 @@ class Blockchain {
         return minedBlock
     }
 
+    fun previousHash() : Block = blocks[blocks.size-1]
+
     private fun isMined(block: Block) : Boolean {
         return block.hash.startsWith(validPrefix)
     }

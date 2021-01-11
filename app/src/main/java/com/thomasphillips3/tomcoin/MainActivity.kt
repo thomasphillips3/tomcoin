@@ -17,17 +17,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
-            val block1 = Block.create(previousHash = "0", data = "first block data")
-            val block2 = Block.create(previousHash = block1.toString().hash(), data = "second block data")
-            val block3 = Block.create(previousHash = block2.toString().hash(), data = "third block data")
+        val genesisBlock = Block.create(previousHash = "0", data = "first block data")
+        blockchain.add(genesisBlock)
 
-            blockchain.add(block1)
-            blockchain.add(block2)
-            blockchain.add(block3)
+        fab.setOnClickListener { view ->
+            val block = Block.create(previousHash = blockchain.previousHash().toString().hash(), data = "block data")
+            blockchain.add(block)
 
             Log.d(this.localClassName.toString(), "blockchain: ${blockchain.toString()}")
-            Snackbar.make(view, block3.toString(), Snackbar.LENGTH_LONG)
+            Snackbar.make(view, block.toString(), Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
         }
     }
